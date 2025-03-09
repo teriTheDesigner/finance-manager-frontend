@@ -27,23 +27,35 @@ export default function Categories() {
 
   const renderItem = ({ item }: { item: CategoryEntity }) => (
     <View style={styles.item}>
-      <Text className="text-white">{item.title}</Text>
+      <Text style={styles.itemText}>{item.title}</Text>
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={() => handleDelete(item.id?.toString() ?? "")}
+      >
+        <Text style={styles.deleteText}>X</Text>
+      </TouchableOpacity>
     </View>
   );
+
+  const handleDelete = (categoryId: string) => {
+    console.log("Delete category:", categoryId);
+    // dispatch(deleteCategory(categoryId));
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All Categories</Text>
       {categories && categories.length > 0 && (
         <FlatList
           style={styles.flatList}
-          data={categories}
+          data={categories.slice().reverse()}
           keyExtractor={(item) => item.id?.toString() ?? ""}
           renderItem={renderItem}
         />
       )}
       <LinearGradient
         colors={["transparent", "black"]}
-        style={styles.gradient}
+        style={[styles.gradient, { pointerEvents: "none" }]}
       />
       <View style={styles.buttonWrapper}>
         <TouchableOpacity
@@ -84,10 +96,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "white",
     backgroundColor: "#1a1a1a",
-    padding: 20,
+    padding: 10,
     borderRadius: 8,
     width: "100%",
     maxWidth: 400,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  itemText: {
+    color: "white",
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  deleteButton: {
+    backgroundColor: "#2d2d2d",
+    borderRadius: 5,
+    padding: 5,
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  deleteText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
   },
   buttonWrapper: {
     width: "100%",
