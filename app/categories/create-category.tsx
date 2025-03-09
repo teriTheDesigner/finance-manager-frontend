@@ -2,12 +2,23 @@ import { StyleSheet, View, Text } from "react-native";
 import { Input, InputField } from "@/components/ui/input";
 import { Button, ButtonText, ButtonIcon } from "@/components/ui/button";
 import React from "react";
+import { CategoryEntity } from "./CategoryEntity";
+import { AppDispatch } from "../store/store";
+import { useDispatch } from "react-redux";
+import { createCategory } from "../store/categorySlice";
+import { useRouter } from "expo-router";
 
 export default function CreateCategory() {
   const [categoryName, setCategoryName] = React.useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
-  const createCategory = () => {
+  const onCreateCategory = async () => {
     console.log("Category created:", categoryName);
+    const newCategory = new CategoryEntity(categoryName);
+
+    dispatch(createCategory(newCategory));
+    // router.push("/categories/categories-list");
   };
 
   return (
@@ -27,7 +38,7 @@ export default function CreateCategory() {
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button onPress={createCategory}>
+          <Button onPress={onCreateCategory}>
             <ButtonText style={styles.buttonText}>Create Category</ButtonText>
             <ButtonIcon />
           </Button>

@@ -2,51 +2,12 @@ import { FlatList, StyleSheet, View, Text } from "react-native";
 import { Input, InputField } from "@/components/ui/input";
 import { Button, ButtonText, ButtonIcon } from "@/components/ui/button";
 import React from "react";
-import { CategoriesEntity } from "../CategoriesEntity";
+import { CategoryEntity } from "../categories/CategoryEntity";
 
 export default function HomeScreen() {
-  const [CategoriesScreens, setCategoriesScreens] = React.useState(
-    [] as CategoriesEntity[]
-  );
-  const [CategoriesScreen, setCategoriesScreen] = React.useState("");
-  const onAddCategoriesScreen = () => {
-    const newCategoriesScreen = new CategoriesEntity(
-      CategoriesScreens.length,
-      CategoriesScreen
-    );
-    setCategoriesScreens([...CategoriesScreens, newCategoriesScreen]);
-    console.log(CategoriesScreens);
-  };
   return (
     <View style={styles.container}>
-      <Input>
-        <InputField
-          placeholder="Enter text here..."
-          onChangeText={setCategoriesScreen}
-          value={CategoriesScreen}
-          className="color-white w-56"
-        />
-      </Input>
-
-      <Button>
-        <ButtonText
-          onPress={onAddCategoriesScreen}
-          className="font-medium text-sm ml-2"
-        >
-          Add CategoriesScreen
-        </ButtonText>
-        <ButtonIcon />
-      </Button>
-
-      <FlatList
-        data={CategoriesScreens}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.listItem}>
-            <Text style={styles.itemText}>{item.title}</Text>
-          </View>
-        )}
-      />
+      <Text className="text-white">Welcome to the finance manager app!</Text>
     </View>
   );
 }
@@ -55,6 +16,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
     gap: 20,
   },

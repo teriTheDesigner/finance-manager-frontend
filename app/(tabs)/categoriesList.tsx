@@ -1,21 +1,36 @@
 import React from "react";
 import { View, Text, FlatList, StyleSheet, Button } from "react-native";
 import { useRouter } from "expo-router";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { CategoryEntity } from "../categories/CategoryEntity";
+import { fetchCategories } from "../store/categorySlice";
 
 export default function Categories() {
   const router = useRouter();
-  const categories = [
-    { id: 1, title: "Category 1" },
-    { id: 2, title: "Category 2" },
-  ];
+  const categories = useSelector(
+    (state: RootState) => state.category.categories
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
+  React.useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
+
+  const renderItem = ({ item }: { item: CategoryEntity }) => (
+    <View style={styles.item}>
+      <Text className="text-white">{item.title}</Text>
+    </View>
+  );
   return (
     <View style={styles.container}>
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <Text style={styles.item}>{item.title}</Text>}
-      />
+      {categories && categories.length > 0 && (
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item.id?.toString() ?? ""}
+          renderItem={renderItem}
+        />
+      )}
       <Button
         title="Create Category"
         onPress={() => router.push("/categories/create-category")}
