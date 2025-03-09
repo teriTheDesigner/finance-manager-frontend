@@ -26,15 +26,18 @@ export default function Categories() {
     <View style={styles.container}>
       {categories && categories.length > 0 && (
         <FlatList
+          style={styles.flatList}
           data={categories}
           keyExtractor={(item) => item.id?.toString() ?? ""}
           renderItem={renderItem}
         />
       )}
-      <Button
-        title="Create Category"
-        onPress={() => router.push("/categories/create-category")}
-      />
+      <View style={styles.buttonWrapper}>
+        <Button
+          title="Create Category"
+          onPress={() => router.push("/categories/create-category")}
+        />
+      </View>
     </View>
   );
 }
@@ -43,10 +46,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000",
+    width: "100%",
   },
   item: {
     fontSize: 18,
     marginBottom: 10,
     color: "white",
+    backgroundColor: "#1a1a1a",
+    padding: 20,
+    borderRadius: 8,
+    width: "100%",
+    maxWidth: 400,
+  },
+  buttonWrapper: {
+    width: "100%",
+  },
+  flatList: {
+    width: "100%",
   },
 });
