@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { CategoryEntity } from "../categories/CategoryEntity";
 import { fetchCategories } from "../store/categorySlice";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Categories() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function Categories() {
   );
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>All Categories</Text>
       {categories && categories.length > 0 && (
         <FlatList
           style={styles.flatList}
@@ -32,6 +34,10 @@ export default function Categories() {
           renderItem={renderItem}
         />
       )}
+      <LinearGradient
+        colors={["transparent", "black"]}
+        style={styles.gradient}
+      />
       <View style={styles.buttonWrapper}>
         <Button
           title="Create Category"
@@ -43,10 +49,15 @@ export default function Categories() {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    color: "white",
+  },
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#000",
     width: "100%",
@@ -66,5 +77,12 @@ const styles = StyleSheet.create({
   },
   flatList: {
     width: "100%",
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 200,
   },
 });
