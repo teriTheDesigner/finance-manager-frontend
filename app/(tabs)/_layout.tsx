@@ -46,7 +46,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="categoriesList"
+        name="all-categories"
         options={{
           title: "Categories",
           tabBarIcon: ({ color }) => (

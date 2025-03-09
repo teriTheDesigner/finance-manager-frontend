@@ -19,7 +19,7 @@ export default function CreateCategory() {
     const newCategory = new CategoryEntity(categoryName);
 
     dispatch(createCategory(newCategory));
-    // router.push("/categories/categories-list");
+    router.push("../all-categories");
   };
 
   return (
@@ -41,7 +41,7 @@ export default function CreateCategory() {
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button} onPress={onCreateCategory}>
             <LinearGradient
-              colors={["#FF4D96", "#9B39D3"]} // Pink to purple gradient
+              colors={["#FF4D96", "#9B39D3"]}
               start={[0, 0]}
               end={[1, 1]}
               style={styles.buttonGradient}
