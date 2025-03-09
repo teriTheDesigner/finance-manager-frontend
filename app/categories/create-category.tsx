@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Input, InputField } from "@/components/ui/input";
 import { Button, ButtonText, ButtonIcon } from "@/components/ui/button";
 import React from "react";
@@ -7,6 +7,7 @@ import { AppDispatch } from "../store/store";
 import { useDispatch } from "react-redux";
 import { createCategory } from "../store/categorySlice";
 import { useRouter } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function CreateCategory() {
   const [categoryName, setCategoryName] = React.useState("");
@@ -38,10 +39,16 @@ export default function CreateCategory() {
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button onPress={onCreateCategory}>
-            <ButtonText style={styles.buttonText}>Create Category</ButtonText>
-            <ButtonIcon />
-          </Button>
+          <TouchableOpacity style={styles.button} onPress={onCreateCategory}>
+            <LinearGradient
+              colors={["#FF4D96", "#9B39D3"]} // Pink to purple gradient
+              start={[0, 0]}
+              end={[1, 1]}
+              style={styles.buttonGradient}
+            >
+              <Text style={styles.buttonText}>Create Category</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -51,7 +58,7 @@ export default function CreateCategory() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
+    paddingVertical: 30,
     alignItems: "center",
     backgroundColor: "#000",
   },
@@ -66,33 +73,33 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     color: "white",
-    fontSize: 16,
-    fontWeight: "500",
+    fontSize: 18,
+    fontWeight: "bold",
     marginBottom: 10,
     alignSelf: "flex-start",
   },
   inputWrapper: {
     width: "100%",
-    marginBottom: 16,
+    marginBottom: 20,
   },
   buttonWrapper: {
     width: "100%",
     marginBottom: 20,
   },
-  buttonText: {
-    textAlign: "center",
-    width: "100%",
-  },
-  listContainer: {
-    width: "100%",
-  },
-  listItem: {
-    backgroundColor: "#e0e0e0",
-    padding: 10,
+  button: {
     borderRadius: 8,
-    marginBottom: 10,
+    overflow: "hidden",
   },
-  itemText: {
-    fontSize: 16,
+  buttonGradient: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
   },
 });

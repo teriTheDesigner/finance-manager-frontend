@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
@@ -39,10 +46,19 @@ export default function Categories() {
         style={styles.gradient}
       />
       <View style={styles.buttonWrapper}>
-        <Button
-          title="Create Category"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => router.push("/categories/create-category")}
-        />
+        >
+          <LinearGradient
+            colors={["#FF4D96", "#9B39D3"]}
+            start={[0, 0]}
+            end={[1, 1]}
+            style={styles.buttonGradient}
+          >
+            <Text style={styles.buttonText}>Create Category</Text>
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -53,10 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: "white",
+    fontWeight: "bold",
   },
   container: {
     flex: 1,
-    padding: 20,
+    padding: 30,
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#000",
@@ -74,6 +91,22 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     width: "100%",
+  },
+  button: {
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  buttonGradient: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
   },
   flatList: {
     width: "100%",
