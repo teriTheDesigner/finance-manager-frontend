@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     gap: 20,
+    backgroundColor: "#000",
   },
   listItem: {
     backgroundColor: "#e0e0e0",
