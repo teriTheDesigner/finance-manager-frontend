@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
+    gap: 20,
   },
   listItem: {
     backgroundColor: "#e0e0e0",
