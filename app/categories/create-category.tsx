@@ -1,22 +1,15 @@
-import { FlatList, StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Input, InputField } from "@/components/ui/input";
 import { Button, ButtonText, ButtonIcon } from "@/components/ui/button";
 import React from "react";
-import { CategoriesEntity } from "../CategoriesEntity";
 
 export default function CreateCategory() {
-  const [CategoriesScreens, setCategoriesScreens] = React.useState(
-    [] as CategoriesEntity[]
-  );
-  const [CategoriesScreen, setCategoriesScreen] = React.useState("");
-  const onAddCategoriesScreen = () => {
-    const newCategoriesScreen = new CategoriesEntity(
-      CategoriesScreens.length,
-      CategoriesScreen
-    );
-    setCategoriesScreens([...CategoriesScreens, newCategoriesScreen]);
-    console.log(CategoriesScreens);
+  const [categoryName, setCategoryName] = React.useState("");
+
+  const createCategory = () => {
+    console.log("Category created:", categoryName);
   };
+
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
@@ -26,30 +19,19 @@ export default function CreateCategory() {
           <Input>
             <InputField
               placeholder="Enter name here..."
-              onChangeText={setCategoriesScreen}
-              value={CategoriesScreen}
+              value={categoryName}
+              onChangeText={setCategoryName}
               className="text-white"
             />
           </Input>
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button onPress={onAddCategoriesScreen}>
+          <Button onPress={createCategory}>
             <ButtonText style={styles.buttonText}>Create Category</ButtonText>
             <ButtonIcon />
           </Button>
         </View>
-
-        <FlatList
-          data={CategoriesScreens}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.listItem}>
-              <Text style={styles.itemText}>{item.title}</Text>
-            </View>
-          )}
-          contentContainerStyle={styles.listContainer}
-        />
       </View>
     </View>
   );
